@@ -1,18 +1,15 @@
 package summultiples
 
-func MultipleSummer(a... int) (func(int) int) {
-
-	return func(limit int) int {
-		sumsCache := make(map[int]int)
-		var s int
-		for _, n := range a {
-			for nn := n; nn < limit; nn += n {
-				if sumsCache[nn] == 0 {
-					s += nn
-					sumsCache[nn] = 1
+func MultipleSummer(multiples... int) (func(int) int) {
+	return func(limit int) (sum int) {
+		for i := 0; i < limit; i++ {
+			for _, m := range multiples {
+				if i % m == 0 {
+					sum += i
+					break
 				}
 			}
 		}
-		return s
+		return sum
 	}
 }
